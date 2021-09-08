@@ -19,7 +19,7 @@ export default class Table {
                     this.users.push(user);
                     this.usersId.push(user.id)
                 });
-                const wrapperTable = document.querySelector('.table');
+                const wrapperTable = document.querySelector('.wrapper__table');
 
                 for (let i = 0; i < this.users.length; i++) { 
                     let userDiv = document.createElement('div');
@@ -49,7 +49,7 @@ export default class Table {
 
     setData = () => {
 
-        const wrapperTable = document.querySelector('.table');
+        const wrapperTable = document.querySelector('.wrapper__table');
 
         for (let i = this.firstDateIndex; i < this.firstDateIndex + 7; i++) {
             let date = new Date(this.actualDate);
