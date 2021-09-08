@@ -1,0 +1,54 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "firstName": "Иван"
+        },
+        {
+            "id": 2,
+            "firstName": "Артем"
+        },
+        {
+            "id": 3,
+            "firstName": "Михаил"
+        },
+        {
+            "id": 4,
+            "firstName": "Артем"
+        },
+        {
+            "id": 5,
+            "firstName": "Максим"
+        }
+    ],
+    "tasks": [
+        {
+            "id": "2mJNcV",
+            "subject": "Анализ",
+            "planStartDate": "2021-09-08",
+            "planEndDate": "2021-09-09",
+            "executor": null
+        },
+        {
+            "id": "AuXD40",
+            "subject": "Планирование",
+            "planStartDate": "2021-09-09",
+            "planEndDate": "2021-09-10",
+            "executor": null
+        },
+        {
+            "id": "DJShMh",
+            "subject": "Разработка",
+            "planStartDate": "2021-09-09",
+            "planEndDate": "2021-09-13",
+            "executor": 3
+        },
+        {
+            "id": "1mIy5B",
+            "subject": "Тестирование",
+            "planStartDate": "2021-09-13",
+            "planEndDate": "2021-09-13",
+            "executor": null
+        }
+    ]
+}
