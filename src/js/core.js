@@ -19,7 +19,7 @@ export default class Table {
                     this.users.push(user);
                     this.usersId.push(user.id)
                 });
-                const wrapperTable = document.querySelector('.wrapper__table');
+                const table = document.querySelector('.wrapper__table');
 
                 for (let i = 0; i < this.users.length; i++) { 
                     let userDiv = document.createElement('div');
@@ -27,18 +27,18 @@ export default class Table {
                     userDiv.classList.add('user');
                     userDiv.dataset.userId = `${this.users[i].id}`
                     userDiv.style.gridRow = `${i+2}/${i+3}`;
-                    wrapperTable.append(userDiv);
+                    table.append(userDiv);
                 }
 
                 for (let i = 2; i < 9; i++) {
 
                     for (let k = 2; k < this.users.length + 2; k++) {
-                        let wrapperTask = document.createElement('div');
-                        wrapperTask.style.gridColumn = `${i}/${i+1}`;
-                        wrapperTask.style.gridRow = `${k}/${k+1}`;
-                        wrapperTask.classList.add('wrapper__task');
-                        wrapperTask.dataset.cell = `c${i}_r${k}`;
-                        wrapperTable.append(wrapperTask);
+                        let taskCell = document.createElement('div');
+                        taskCell.style.gridColumn = `${i}/${i+1}`;
+                        taskCell.style.gridRow = `${k}/${k+1}`;
+                        taskCell.classList.add('task-cell');
+                        taskCell.dataset.cell = `c${i}_r${k}`;
+                        table.append(taskCell);
                     }
 
                 }
@@ -49,7 +49,7 @@ export default class Table {
 
     setData = () => {
 
-        const wrapperTable = document.querySelector('.wrapper__table');
+        const table = document.querySelector('.wrapper__table');
 
         for (let i = this.firstDateIndex; i < this.firstDateIndex + 7; i++) {
             let date = new Date(this.actualDate);
@@ -59,7 +59,7 @@ export default class Table {
             dateDiv.classList.add('date');
             dateDiv.dataset.dateIndex = `${i - this.firstDateIndex}`;
             dateDiv.style.gridColumn = `${i - this.firstDateIndex  + 2}/${i - this.firstDateIndex  + 3}`;
-            wrapperTable.append(dateDiv);
+            table.append(dateDiv);
             date = date.toISOString();
             date = date.slice(0, date.indexOf('T'));
             this.dates[i-this.firstDateIndex] = date;
@@ -86,7 +86,7 @@ export default class Table {
             if (this.usersId.indexOf(task.executor) >= 0 && this.dates.indexOf(startDate) >= 0) {
                 let row = this.usersId.indexOf(task.executor) + 2;
                 let column = this.dates.indexOf(startDate) + 2;
-                let wrapperTask = document.querySelector(`[data-cell="c${column}_r${row}"]`);
+                let taslCell = document.querySelector(`[data-cell="c${column}_r${row}"]`);
                 let taskDiv = document.createElement('div');
                 taskDiv.classList.add('task');
                 taskDiv.dataset.planEnd = `План завершения: ${task.planEndDate}`;
@@ -97,7 +97,7 @@ export default class Table {
                 }
                 
                 taskDiv.textContent = `${task.subject} (${timeLeft}ч)`;
-                wrapperTask.append(taskDiv);
+                taslCell.append(taskDiv);
 
             }
 
@@ -164,23 +164,23 @@ export default class Table {
                 e.target.classList.remove('hovered');
             })
         });
-        const wrapperTasks = document.querySelectorAll('.wrapper__task');
-        wrapperTasks.forEach(wrapper => {
-            wrapper.addEventListener('dragover', (e) => {
+        const taskCell = document.querySelectorAll('.task-cell');
+        taskCell.forEach(cell => {
+            cell.addEventListener('dragover', (e) => {
                 e.preventDefault();
             });
-            wrapper.addEventListener('dragenter', (e) => {
+            cell.addEventListener('dragenter', (e) => {
                 e.currentTarget.classList.add('hovered');
             })
-            wrapper.addEventListener('dragleave', (e) => {
+            cell.addEventListener('dragleave', (e) => {
                 e.currentTarget.classList.remove('hovered');
             })
-            wrapper.addEventListener('drop', (e) => {
+            cell.addEventListener('drop', (e) => {
                 let reg = /r/;
-                const cell = e.currentTarget.dataset.cell;
-                const indexOfUsersId = +cell.slice(cell.search(reg) + 1) - 2;
+                const cellNumber = e.currentTarget.dataset.cell;
+                const indexOfUsersId = +cellNumber.slice(cellNumber.search(reg) + 1) - 2;
                 reg = /_/;
-                const indexOfDatesArr = +cell.slice(1, cell.search(reg)) - 2;
+                const indexOfDatesArr = +cellNumber.slice(1, cellNumber.search(reg)) - 2;
                 this.usersId.forEach((id, i) => {
                     if(i == indexOfUsersId) {
                         this.tasks.forEach(task => {

@@ -34,7 +34,7 @@
     color: white;
 }
 
-.wrapper__task {
+.task-cell {
     border-top: 1px solid black;
     border-left: 1px solid black;
 }
