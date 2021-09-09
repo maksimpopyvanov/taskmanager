@@ -1,5 +1,5 @@
 {
-  "name": "taskmanager",
+  "name": "task-manager",
   "version": "1.0.0",
   "description": "taskmanager",
   "main": "./src/js/index.js",
